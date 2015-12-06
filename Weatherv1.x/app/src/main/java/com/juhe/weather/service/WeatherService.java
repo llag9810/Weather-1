@@ -35,9 +35,9 @@ public class WeatherService extends Service {
 	private final String tag = "WeatherService";
 	private WeatherServiceBinder binder = new WeatherServiceBinder();
 	private boolean isRunning = false;
-	private List<HoursWeatherBean> list;
-	private PMBean pmBean;
-	private WeatherBean weatherBean;
+	private List<HoursWeatherBean> list;//存放小时天气
+	private PMBean pmBean;//两个类，存放天气信息
+	private WeatherBean weatherBean;//两个类，存放天气信息
 	private OnParserCallBack callBack;
 
 	private final int REPEAT_MSG = 0x01;
@@ -46,7 +46,8 @@ public class WeatherService extends Service {
 
 	public interface OnParserCallBack {
 		public void OnParserComplete(List<HoursWeatherBean> list, PMBean pmBean, WeatherBean weatherBean);
-	}
+	    //这个接口在Weatheractivity中实现，主要用于显示
+    }
 
 	@Override
 	public IBinder onBind(Intent arg0) {
@@ -58,7 +59,7 @@ public class WeatherService extends Service {
 	public void onCreate() {
 		// TODO Auto-generated method stub
 		super.onCreate();
-		city = "北京";
+		city = "北京";//默认为北京，，差点以为他能用GPS定位，汗
 		mHandler.sendEmptyMessage(REPEAT_MSG);
 	}
 
@@ -82,7 +83,7 @@ public class WeatherService extends Service {
 				sendEmptyMessageDelayed(REPEAT_MSG, 30 * 60 * 1000);
 				break;
 			case CALLBACK_OK:
-				if (callBack != null) {
+				if (callBack != null) {//在主线程中显示天气信息
 					callBack.OnParserComplete(list, pmBean, weatherBean);
 				}
 				isRunning = false;
@@ -135,17 +136,18 @@ public class WeatherService extends Service {
 	}
 
 	public void getCityWeather() {
-		if (isRunning) {
+		if (isRunning) {//getCityWeather正在运行么？
 			return;
 		}
 		isRunning = true;
-		final CountDownLatch countDownLatch = new CountDownLatch(3);
+		final CountDownLatch countDownLatch = new CountDownLatch(3);//.countDown();.await();等值变为0再往下走
 		WeatherData data = WeatherData.getInstance();
 
-		data.getByCitys(city, 2, new JsonCallBack() {
+		data.getByCitys(city, 2, new JsonCallBack() {//以格式2,得到城市的天气信息
+
 
 			@Override
-			public void jsonLoaded(JSONObject arg0) {
+			public void jsonLoaded(JSONObject arg0) {//arg0由系统给出
 				// TODO Auto-generated method stub
 
 				weatherBean = parserWeather(arg0);
@@ -190,7 +192,7 @@ public class WeatherService extends Service {
 				// TODO Auto-generated method stub
 				try {
 					countDownLatch.await();
-					mHandler.sendEmptyMessage(CALLBACK_OK);
+					mHandler.sendEmptyMessage(CALLBACK_OK);//如果成功获取则，再UI主线程中显示
 				} catch (InterruptedException ex) {
 					mHandler.sendEmptyMessage(CALLBACK_ERROR);
 					return;
@@ -201,7 +203,7 @@ public class WeatherService extends Service {
 	}
 
 	// 解析城市查询接口
-	private WeatherBean parserWeather(JSONObject json) {
+	private WeatherBean parserWeather(JSONObject json) {//JSONObject,
 
 		WeatherBean bean = null;
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");

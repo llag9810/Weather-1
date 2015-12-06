@@ -85,16 +85,16 @@ public class WeatherActivity extends Activity {
         // TODO Auto-generated method stub
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_weather);
-        mContext = this;
+        mContext = this;//获取上下文
         init();
         initService();
 
     }
 
-    private void initService() {
+    private void initService() {//启动Service
         Intent intent = new Intent(mContext, WeatherService.class);
         startService(intent);
-        bindService(intent, conn, Context.BIND_AUTO_CREATE);
+        bindService(intent, conn, Context.BIND_AUTO_CREATE);//activity于service绑定，当activity退出时service也退出，没绑定的话，service并不随activity退出而退出
     }
 
     ServiceConnection conn = new ServiceConnection() {
@@ -102,14 +102,14 @@ public class WeatherActivity extends Activity {
         @Override
         public void onServiceDisconnected(ComponentName arg0) {
             // TODO Auto-generated method stub
-            mService.removeCallBack();
+            mService.removeCallBack();//清除天气信息？
         }
 
         @Override
         public void onServiceConnected(ComponentName arg0, IBinder arg1) {
             // TODO Auto-generated method stub
-            mService = ((WeatherServiceBinder) arg1).getService();
-            mService.setCallBack(new OnParserCallBack() {
+            mService = ((WeatherServiceBinder) arg1).getService();//获取天气信息
+            mService.setCallBack(new OnParserCallBack() {//天气信息显示
 
                 @Override
                 public void OnParserComplete(List<HoursWeatherBean> list, PMBean pmBean, WeatherBean weatherBean) {
@@ -218,7 +218,7 @@ public class WeatherActivity extends Activity {
             @Override
             public void onRefresh(PullToRefreshBase<ScrollView> refreshView) {
                 // TODO Auto-generated method stub
-                mService.getCityWeather();
+                mService.getCityWeather();//刷新的时候去Service中获取天气信息并显示
                 
             }
             
@@ -227,7 +227,7 @@ public class WeatherActivity extends Activity {
         mScrollView = mPullToRefreshScrollView.getRefreshableView();
 
         rl_city = (RelativeLayout) findViewById(R.id.rl_city);
-        rl_city.setOnClickListener(new OnClickListener() {
+        rl_city.setOnClickListener(new OnClickListener() {//进入城市选择列表的activity
 
             @Override
             public void onClick(View v) {
@@ -283,7 +283,7 @@ public class WeatherActivity extends Activity {
     }
 
     @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {//这里好像没有用到
         // TODO Auto-generated method stub
         if (requestCode == 1 && resultCode == 1) {
             String city = data.getStringExtra("city");
