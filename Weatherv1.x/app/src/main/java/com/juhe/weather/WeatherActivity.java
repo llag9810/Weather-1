@@ -86,7 +86,7 @@ public class WeatherActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_weather);
         mContext = this;//获取上下文
-        init();
+        initView();
         initService();
 
     }
@@ -211,7 +211,7 @@ public class WeatherActivity extends Activity {
 
     }
 
-    private void init() {
+    private void initView() {
         mPullToRefreshScrollView = (PullToRefreshScrollView) findViewById(R.id.pull_refresh_scrollview);
         mPullToRefreshScrollView.setOnRefreshListener(new OnRefreshListener<ScrollView>() {
 
