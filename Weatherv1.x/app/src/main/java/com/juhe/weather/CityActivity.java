@@ -124,7 +124,6 @@ public class CityActivity extends Activity {
     }
     //  用android-async-http.jar 做http请求
     private void getCityList(){
-
         RequestParams params=new RequestParams();
         params.put("key",Constant.APP_WEATHER_KEY);
         HttpUtil.get(Constant.WEATHER_CITYS, params, new TextHttpResponseHandler() {

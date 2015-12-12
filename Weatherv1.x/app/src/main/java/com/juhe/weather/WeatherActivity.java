@@ -91,12 +91,11 @@ public class WeatherActivity extends Activity {
 
     }
 
-    private void initService() {//启动Service
+    private void initService() {                                              //启动Service
         Intent intent = new Intent(mContext, WeatherService.class);
-        startService(intent);
-        bindService(intent, conn, Context.BIND_AUTO_CREATE);//activity于service绑定，当activity退出时service也退出，没绑定的话，service并不随activity退出而退出
+        startService(intent);                                                 //启动服务C/S架构中的服务端
+        bindService(intent, conn, Context.BIND_AUTO_CREATE);               //绑定service,也可在其它Activity中绑定本服务
     }
-
     ServiceConnection conn = new ServiceConnection() {
 
         @Override
@@ -104,13 +103,11 @@ public class WeatherActivity extends Activity {
             // TODO Auto-generated method stub
             mService.removeCallBack();//清除天气信息？
         }
-
         @Override
-        public void onServiceConnected(ComponentName arg0, IBinder arg1) {
+        public void onServiceConnected(ComponentName arg0, IBinder arg1) {                        //Service连接成功,调用onServiceConnected
             // TODO Auto-generated method stub
-            mService = ((WeatherServiceBinder) arg1).getService();//获取天气信息
-            mService.setCallBack(new OnParserCallBack() {//天气信息显示
-
+            mService = ((WeatherServiceBinder) arg1).getService();                                 //从IBinde中，获取服务实例，服务变得可用；
+            mService.setCallBack(new OnParserCallBack() {                                         //设置Service的回调,数据解析完成，调用OnParserCallBack
                 @Override
                 public void OnParserComplete(List<HoursWeatherBean> list, PMBean pmBean, WeatherBean weatherBean) {
                     // TODO Auto-generated method stub
@@ -218,7 +215,7 @@ public class WeatherActivity extends Activity {
             @Override
             public void onRefresh(PullToRefreshBase<ScrollView> refreshView) {
                 // TODO Auto-generated method stub
-                mService.getCityWeather();//刷新的时候去Service中获取天气信息并显示
+                mService.getCityWeather();                                                       //刷新的时候去Service中获取天气信息并显示
                 
             }
             
@@ -236,7 +233,6 @@ public class WeatherActivity extends Activity {
 
             }
         });
-
         tv_city = (TextView) findViewById(R.id.tv_city);
         tv_release = (TextView) findViewById(R.id.tv_release);
         tv_now_weather = (TextView) findViewById(R.id.tv_now_weather);

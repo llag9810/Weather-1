@@ -35,9 +35,9 @@ public class WeatherService extends Service {
 	private final String tag = "WeatherService";
 	private WeatherServiceBinder binder = new WeatherServiceBinder();
 	private boolean isRunning = false;
-	private List<HoursWeatherBean> list;//存放小时天气
-	private PMBean pmBean;//两个类，存放天气信息
-	private WeatherBean weatherBean;//两个类，存放天气信息
+	private List<HoursWeatherBean> list;                                                        //存放小时天气
+	private PMBean pmBean;                                                                      //两个类，存放天气信息
+	private WeatherBean weatherBean;                                                            //两个类，存放天气信息
 	private OnParserCallBack callBack;
 
 	private final int REPEAT_MSG = 0x01;
@@ -59,8 +59,8 @@ public class WeatherService extends Service {
 	public void onCreate() {
 		// TODO Auto-generated method stub
 		super.onCreate();
-		city = "北京";//默认为北京，，差点以为他能用GPS定位，汗
-		mHandler.sendEmptyMessage(REPEAT_MSG);
+		city = "北京";        //默认为北京，，差点以为他能用GPS定位，汗
+		mHandler.sendEmptyMessage(REPEAT_MSG);                               //Handler机制，发消息
 	}
 
 	@Override
@@ -71,14 +71,12 @@ public class WeatherService extends Service {
 	}
 
 	Handler mHandler = new Handler() {
-
 		@Override
 		public void handleMessage(Message msg) {
 			// TODO Auto-generated method stub
 
 			switch (msg.what) {
 			case REPEAT_MSG:
-
 				getCityWeather();
 				sendEmptyMessageDelayed(REPEAT_MSG, 30 * 60 * 1000);
 				break;
@@ -91,7 +89,6 @@ public class WeatherService extends Service {
 			case CALLBACK_ERROR:
 				Toast.makeText(getApplicationContext(), "loading error", Toast.LENGTH_SHORT).show();
 				break;
-
 			default:
 				break;
 			}
@@ -110,7 +107,6 @@ public class WeatherService extends Service {
 				JSONObject pmJSON = json.getJSONArray("result").getJSONObject(0).getJSONObject("citynow");
 				bean.setAqi(pmJSON.getString("AQI"));
 				bean.setQuality(pmJSON.getString("quality"));
-
 			}
 
 		} catch (JSONException e) {
@@ -140,7 +136,7 @@ public class WeatherService extends Service {
 			return;
 		}
 		isRunning = true;
-		final CountDownLatch countDownLatch = new CountDownLatch(3);//.countDown();.await();等值变为0再往下走
+		final CountDownLatch countDownLatch = new CountDownLatch(3);//.countDown();.await();                   等值变为0再往下走
 		WeatherData data = WeatherData.getInstance();
 
 		data.getByCitys(city, 2, new JsonCallBack() {//以格式2,得到城市的天气信息
@@ -192,7 +188,7 @@ public class WeatherService extends Service {
 				// TODO Auto-generated method stub
 				try {
 					countDownLatch.await();
-					mHandler.sendEmptyMessage(CALLBACK_OK);//如果成功获取则，再UI主线程中显示
+					mHandler.sendEmptyMessage(CALLBACK_OK);                                      //如果成功获取则，再UI主线程中显示
 				} catch (InterruptedException ex) {
 					mHandler.sendEmptyMessage(CALLBACK_ERROR);
 					return;
