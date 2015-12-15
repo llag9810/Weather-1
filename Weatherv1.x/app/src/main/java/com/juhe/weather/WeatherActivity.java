@@ -86,7 +86,7 @@ public class WeatherActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_weather);
         mContext = this;//获取上下文
-        initView();
+        init();
         initService();
 
     }
