@@ -48,7 +48,6 @@ public class WeatherService extends Service {
 		public void OnParserComplete(List<HoursWeatherBean> list, PMBean pmBean, WeatherBean weatherBean);
 	    //这个接口在Weatheractivity中实现，主要用于显示
     }
-
 	@Override
 	public IBinder onBind(Intent arg0) {
 		// TODO Auto-generated method stub
@@ -108,14 +107,11 @@ public class WeatherService extends Service {
 				bean.setAqi(pmJSON.getString("AQI"));
 				bean.setQuality(pmJSON.getString("quality"));
 			}
-
 		} catch (JSONException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-
 		return bean;
-
 	}
 
 	public void setCallBack(OnParserCallBack callback) {

@@ -3,7 +3,6 @@ package com.juhe.weather.bean;
 import java.util.List;
 
 public class WeatherBean {
-	
 	private String city;                                                  //城市
 	private String release;                                              //更新时间
 	private String weather_id;                                          //天气唯一标识

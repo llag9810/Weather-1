@@ -2,25 +2,25 @@
 <items version="2" >
 
     <item
-        jar="D:\Weatherv1.x\app\libs\android-async-http-1.4.6.jar"
-        jumboMode="false"
-        revision="21.1.2"
-        sha1="a845a88238be0b5be9d238652c1bc0605ef91f52">
-        <dex dex="D:\Weatherv1.x\app\build\intermediates\pre-dexed\debug\android-async-http-1.4.6-f1997e899321c9ce4733440b01abd239310a350c.jar" />
-    </item>
-    <item
-        jar="F:\360Downloads\adt-bundle-windows-x86-20131030\adt-bundle-windows-x86-20131030\sdk\extras\android\m2repository\com\android\support\support-v4\19.1.0\support-v4-19.1.0.jar"
+        jar="C:\Users\Rudy Steiner\AppData\Local\Android\sdk\extras\android\m2repository\com\android\support\support-v4\19.1.0\support-v4-19.1.0.jar"
         jumboMode="false"
         revision="21.1.2"
         sha1="85f201b380937e61a9dce6ca90ccf6872abbfb67">
-        <dex dex="D:\Weatherv1.x\app\build\intermediates\pre-dexed\debug\support-v4-19.1.0-d49a6715c1b6783ca389f4502447a79d8f5f4c5e.jar" />
+        <dex dex="G:\Workspace\Weather\trunk\Weatherv1.x\app\build\intermediates\pre-dexed\debug\support-v4-19.1.0-95050a1d9afd33e521c11b9fabf35e79f4bc75d7.jar" />
     </item>
     <item
-        jar="D:\Weatherv1.x\app\libs\juhe_sdk_v_1_6.jar"
+        jar="G:\Workspace\Weather\trunk\Weatherv1.x\app\libs\android-async-http-1.4.6.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="a845a88238be0b5be9d238652c1bc0605ef91f52">
+        <dex dex="G:\Workspace\Weather\trunk\Weatherv1.x\app\build\intermediates\pre-dexed\debug\android-async-http-1.4.6-1cbf4f8cc8143b8c9683c38baa4fc822ad1989d4.jar" />
+    </item>
+    <item
+        jar="G:\Workspace\Weather\trunk\Weatherv1.x\app\libs\juhe_sdk_v_1_6.jar"
         jumboMode="false"
         revision="21.1.2"
         sha1="05092fd845516c64c634f0682c674a25f92b3d8e">
-        <dex dex="D:\Weatherv1.x\app\build\intermediates\pre-dexed\debug\juhe_sdk_v_1_6-4b88e286d60d0bd29122e7a3b09bfaa57da3972d.jar" />
+        <dex dex="G:\Workspace\Weather\trunk\Weatherv1.x\app\build\intermediates\pre-dexed\debug\juhe_sdk_v_1_6-8641f88e72edc62d3ec2c8358885396e75401d80.jar" />
     </item>
 
 </items>

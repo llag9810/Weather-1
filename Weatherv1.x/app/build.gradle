@@ -3,7 +3,14 @@ apply plugin: 'com.android.application'
 android {
     compileSdkVersion 18
     buildToolsVersion "21.1.2"
-
+    signingConfigs {
+        release {
+            keyAlias 'weatherkey'
+            keyPassword 'weather'
+            storeFile file('weather.jks')
+            storePassword 'weather'
+        }
+    }
     defaultConfig {
         applicationId "com.juhe.weather"
         minSdkVersion 9
